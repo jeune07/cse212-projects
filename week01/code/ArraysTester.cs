@@ -39,6 +39,22 @@ public static class ArraysTester {
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
+        // Step 1: Initialize an array to store the multiples with the specified length.
+        double[] result = new double[length];
+
+        // Step 2: Check if 'number' is greater than 0, if not, return an empty array.
+        if ( number >0 )
+        {
+            // Step 3: Iterate through the array and calculate each multiple, storing it in the result array.
+            // The loop runs 'length' times, and for each iteration, it calculates the multiple based on the index.
+            for ( int i = 0; i < length; i++ )
+            {
+                result[i]= number * (i+1);
+            }
+            return result;
+        }
+
+        // Step 4: Return the array containing the generated multiples.
         return new double[0]; // replace this return statement with your own
     }
     
@@ -56,6 +72,35 @@ public static class ArraysTester {
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // Step 1: Check for Valid Inputs
+        if (data == null || amount < 1 || amount > data.Count)
+        {
+            // Handle invalid inputs, e.g., throw an exception or return an empty list.
+            // For simplicity, let's return the original list in case of invalid inputs.
+            return data;
+        }
+
+        // Step 2: Determine the Rotation Index
+        int rotationIndex = data.Count - amount;
+
+        // Step 3: Perform the Rotation
+        List<T> rotatedList = new List<T>();
+
+        // Iterate from rotationIndex to the end of the list
+        for (int i = rotationIndex; i < data.Count; i++)
+        {
+            rotatedList.Add(data[i]);
+        }
+
+        // Iterate from the beginning of the list to rotationIndex - 1
+        for (int i = 0; i < rotationIndex; i++)
+        {
+            rotatedList.Add(data[i]);
+        }
+
+        // Step 4: Return the Rotated List
+        return rotatedList;
 
     }
 }
