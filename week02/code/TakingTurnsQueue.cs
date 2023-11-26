@@ -7,43 +7,59 @@
 /// less than they will stay in the queue forever.  If a person is out of turns then they will 
 /// not be added back into the queue.
 /// </summary>
-public class TakingTurnsQueue {
+public class TakingTurnsQueue
+{
     private readonly PersonQueue _people = new();
 
     public int Length => _people.Length;
 
     /// <summary>
-    /// Add new people to the queue with a name and number of turns
+    /// Add new people to the queue with a name and number of turns.
     /// </summary>
     /// <param name="name">Name of the person</param>
     /// <param name="turns">Number of turns remaining</param>
-    public void AddPerson(string name, int turns) {
+    public void AddPerson(string name, int turns)
+    {
         var person = new Person(name, turns);
         _people.Enqueue(person);
     }
 
     /// <summary>
-    /// Get the next person in the queue and display them.  The person should
-    /// go to the back of the queue again unless the turns variable shows that they 
-    /// have no more turns left.  Note that a turns value of 0 or less means the 
-    /// person has an infinite number of turns.  An error message is displayed 
+    /// Get the next person in the queue and display them.
+    /// The person should go to the back of the queue again unless the turns variable shows that they 
+    /// have no more turns left. Note that a turns value of 0 or less means the 
+    /// person has an infinite number of turns. An error message is displayed 
     /// if the queue is empty.
     /// </summary>
-    public void GetNextPerson() {
+    public void GetNextPerson()
+    {
         if (_people.IsEmpty())
+        {
             Console.WriteLine("No one in the queue.");
-        else {
+        }
+        else
+        {
             Person person = _people.Dequeue();
-            if (person.Turns > 1) {
-                person.Turns -= 1;
+            Console.WriteLine(person.Name);
+
+            if (person.Turns > 1)
+            {
+                person.Turns--;
                 _people.Enqueue(person);
             }
-
-            Console.WriteLine(person.Name);
+            else if (person.Turns == 1)
+            {
+                Console.WriteLine($"{person.Name} has 1 turn left and will be removed from the queue.");
+            }
+            else
+            {
+                Console.WriteLine($"{person.Name} has an infinite number of turns.");
+            }
         }
     }
 
-    public override string ToString() {
+    public override string ToString()
+    {
         return _people.ToString();
     }
 }
